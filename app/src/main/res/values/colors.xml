@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorazulsuave">#3F51B5</color>
+    <color name="azulito">#b900e5ff</color>
+    <color name="colorazul">#303F9F</color>
+    <color name="colorAzulfuerte">#001eff</color>
+    <color name="negrito">#000000</color>
+    <color name="azulfondodrawler">#01c1f7</color>
+</resources>
