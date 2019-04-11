@@ -53,7 +53,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         button5.setOnClickListener {
-            val intento2 = Intent(this, MainActivity::class.java)
+            val intento2 = Intent(this, EveryStoreActivity::class.java)
+            intento2.putExtra("toShow",1)
+            startActivity(intento2)
+        }
+        button6.setOnClickListener {
+            val intento2 = Intent(this, EveryStoreActivity::class.java)
+            intento2.putExtra("toShow",2)
+            startActivity(intento2)
+        }
+        button7.setOnClickListener {
+            val intento2 = Intent(this, EveryStoreActivity::class.java)
+            intento2.putExtra("toShow",3)
             startActivity(intento2)
         }
 
