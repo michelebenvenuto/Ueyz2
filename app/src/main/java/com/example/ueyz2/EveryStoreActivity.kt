@@ -1,5 +1,6 @@
 package com.example.ueyz2
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -28,6 +29,12 @@ class EveryStoreActivity : AppCompatActivity() {
         recyclerView.layoutManager= LinearLayoutManager(this)
         adapter = StoreAdapter(this, storeList)
         recyclerView.adapter=adapter
+        adapter.setOnItemClickListener(StoreAdapter.OnItemClickListener {
+            val intento2 = Intent(this, MapsActivity::class.java)
+            intento2.putExtra("lat", storeList[it].latitude)
+            intento2.putExtra("long", storeList[it].longitude)
+            startActivity(intento2)
+        })
         if (itemsToShow==1){
             db.collection("tiendas")
                 .whereEqualTo("type", "Abarrotería")

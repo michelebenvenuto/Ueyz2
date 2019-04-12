@@ -1,20 +1,29 @@
 package com.example.ueyz2;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.support.annotation.NonNull;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import java.util.List;
+        import java.util.List;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHolder> {
 
     private Context mCtx;
     private List<StoreModel> storeModelList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
 
     public StoreAdapter(Context mCtx, List<StoreModel> storeModelList) {
@@ -27,7 +36,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
     public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.store_layout,null);
-        StoreViewHolder holder = new StoreViewHolder(view);
+        StoreViewHolder holder = new StoreViewHolder(view, mListener);
         return holder;
     }
 
@@ -46,15 +55,26 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
         return storeModelList.size();
     }
 
-    class StoreViewHolder extends RecyclerView.ViewHolder {
+    public static class StoreViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView StoreTitle, Direction, textViewDescription, textViewType;
-        public StoreViewHolder(@NonNull View itemView) {
+        TextView StoreTitle, textViewDescription, textViewType;
+        public StoreViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             imageView= itemView.findViewById(R.id.imageView);
             StoreTitle= itemView.findViewById(R.id.StoreTitle);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             textViewType = itemView.findViewById(R.id.textViewType);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
